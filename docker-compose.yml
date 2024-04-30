@@ -1,0 +1,63 @@
+version: '3.0'
+
+services:
+  node:
+    container_name: ${APP_NAME}-node
+    build:
+      context: .
+      dockerfile: docker/client/Dockerfile
+    depends_on:
+      - api
+    networks:
+      - client
+    volumes:
+      - ./client:/app/client
+
+  nginx:
+    image: nginx:1.25.5-alpine
+    container_name: ${APP_NAME}-nginx
+    ports:
+      - '${NGINX_PORT}:80'
+    volumes:
+      - ./client/public:/app/client/public
+      - ./docker/nginx/default.nginx:/etc/nginx/conf.d/default.conf
+    networks:
+      - server
+      - client
+    depends_on:
+      - api
+      - node
+
+  api:
+    container_name: ${APP_NAME}-api
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    volumes:
+      - ./api:/app/api
+    networks:
+      - server
+      - db
+    depends_on:
+      - db
+
+  db:
+    container_name: ${APP_NAME}-db
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - '${DB_PORT}:5432'
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_DB: ${DATABASE_NAME}
+    networks:
+      - db
+
+networks:
+  server:
+    driver: bridge
+  client:
+    driver: bridge
+  db:
+    driver: bridge
