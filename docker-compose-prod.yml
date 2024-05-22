@@ -23,8 +23,6 @@ services:
       API_PORT: ${API_PORT}
     networks:
       - anti_cafe_manager
-    ports:
-      - 80:80
 
   api:
     container_name: ${APP_NAME}-api
