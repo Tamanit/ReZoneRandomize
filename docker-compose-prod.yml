@@ -1,3 +1,5 @@
+version: '3.7'
+
 services:
   nginx:
     container_name: ${APP_NAME}-nginx
@@ -21,6 +23,8 @@ services:
       API_PORT: ${API_PORT}
     networks:
       - anti_cafe_manager
+    ports:
+      - 80:80
 
   api:
     container_name: ${APP_NAME}-api
@@ -37,11 +41,10 @@ services:
         - anti_cafe_manager.docker.network=anti_cafe_manager
         - anti_cafe_manager.http.routers.anti_cafe_manager.entrypoints=websecure
         - anti_cafe_manager.http.routers.anti_cafe_manager.rule=Host(`rezone-service.ru.ru`)
-        - anti_cafe_manager.http.services.anti_cafe_manager.loadbalancer.server.port=${API_PORT}
         - anti_cafe_manager.http.services.anti_cafe_manager.loadbalancer.passhostheader=true
     networks:
       - anti_cafe_manager
-      - db
+      - postgres-db
 
 networks:
   anti_cafe_manager:
