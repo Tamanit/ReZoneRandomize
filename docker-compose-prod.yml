@@ -12,17 +12,18 @@ services:
       mode: replicated
       replicas: 1
       labels:
-        - anti_cafe_manager.enable=true
-        - anti_cafe_manager.docker.network=anti_cafe_manager
-        - anti_cafe_manager.http.routers.anti_cafe_manager.entrypoints=websecure
-        - anti_cafe_manager.http.services.anti_cafe_manager.loadbalancer.server.port=${NGINX_PORT}
-        - anti_cafe_manager.http.routers.anti_cafe_manager.rule=Host(`${DOMAIN}`)
-        - anti_cafe_manager.http.services.anti_cafe_manager.loadbalancer.passhostheader=true
+        - traefik.enable=true
+        - traefik.docker.network=traefik
+        - traefik.http.routers.anti_cafe_manager.entrypoints=websecure
+        - traefik.http.services.anti_cafe_manager.loadbalancer.server.port=${NGINX_PORT}
+        - traefik.http.routers.anti_cafe_manager.rule=Host(`${DOMAIN}`)
+        - traefik.http.services.anti_cafe_manager.loadbalancer.passhostheader=true
     environment:
       DOMAIN: ${DOMAIN}
       API_PORT: ${API_PORT}
     networks:
       - anti_cafe_manager
+      - traefik
 
   api:
     container_name: ${APP_NAME}-api
@@ -46,6 +47,8 @@ services:
 
 networks:
   anti_cafe_manager:
-   external: true
+   driver: bridge
+  traefik:
+    external: true
   postgres-db:
     external: true

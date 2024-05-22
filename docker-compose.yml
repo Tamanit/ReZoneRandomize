@@ -14,8 +14,6 @@ services:
       - ./client:/app/client
 
   nginx:
-
-    image: nginx:1.25.5-alpine
     container_name: ${APP_NAME}-nginx
     build:
       context: .
