@@ -43,23 +43,8 @@ services:
       - anti_cafe_manager
       - db
 
-  db:
-    container_name: ${APP_NAME}-db
-    image: postgres
-    restart: unless-stopped
-    ports:
-      - '${DB_PORT}:5432'
-    environment:
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_DB: ${DATABASE_NAME}
-    networks:
-      - db
-
 networks:
   anti_cafe_manager:
-    driver: bridge
-#    external: true
-  db:
-    driver: bridge
-#    external: true
+   external: true
+  postgres-db:
+    external: true
