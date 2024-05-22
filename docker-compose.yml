@@ -14,14 +14,14 @@ services:
       - ./client:/app/client
 
   nginx:
+
     image: nginx:1.25.5-alpine
     container_name: ${APP_NAME}-nginx
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
     ports:
       - '${NGINX_PORT}:80'
-    volumes:
-      - ./docker/nginx/template-variables:/etc/nginx/templates/10-variables.conf.template
-      - ./client/public:/app/client/public
-      - ./docker/nginx/default.nginx:/etc/nginx/conf.d/default.conf
     networks:
       - server
       - client

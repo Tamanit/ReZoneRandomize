@@ -3,6 +3,10 @@ version: "3.7"
 networks:
   postgres-db:
     external: true
+  server:
+    driver: bridge
+  client:
+    driver: bridge
 
 services:
   node:
@@ -12,6 +16,8 @@ services:
         condition: any
       mode: replicated
       replicas: 1
+    networks:
+      - client
 
   api:
     image: tamanit/time_cafe_manager_api:latest
@@ -22,3 +28,15 @@ services:
       replicas: 1
     networks:
       - postgres-db
+      - server
+
+  nginx:
+    image: tamanit/time_cafe_manager_nginx:latest
+    deploy:
+      restart_policy:
+        condition: any
+      mode: replicated
+      replicas: 1
+    networks:
+      - client
+      - server
