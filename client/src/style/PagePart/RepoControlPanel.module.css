@@ -1,0 +1,28 @@
+.plate {
+    display: flex;
+    padding: 0 16px;
+
+    min-height: 72px;
+
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #1E0E40;
+
+    border-top-left-radius: 33px;
+    border-top-right-radius: 33px;
+
+    border: 2px #1E0E40 solid;
+    border-bottom-style: hidden ;
+
+    color: white;
+    text-align: center;
+}
+
+
+.pageButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}

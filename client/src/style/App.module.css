@@ -1,0 +1,14 @@
+.app {
+    background-color: #F2F2F2;
+    height: 100%;
+    width: 100%;
+
+
+    font-family: "URW Gothic";
+    font-size: 16px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

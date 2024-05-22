@@ -1,0 +1,23 @@
+name: build-and-deploy
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build-and-deploy-to-production:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and push T3 App
+        working-directory: .
+        run: |
+          cp ./.env ./app/.env
+          docker build -f ./docker/client/Dockerfile -t tamanit/time_cafe_manager_node:latest .
+          docker push tamanit/time_cafe_manager_node
+          
+          docker build -f ./docker/api/Dockerfile -t tamanit/time_cafe_manager_api:latest .
+          docker push tamanit/time_cafe_manager_api
+
+      - name: Update services
+        working-directory: .
+        run: |
+          docker stack deploy -c docker-compose-prod.yml --with-registry-auth --prune -d time_cafe_manager

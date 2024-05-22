@@ -1,0 +1,18 @@
+.footer {
+    min-height: 100px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: #1E0E40;
+    color: white;
+
+    border-radius: 36px;
+}
+
+.img {
+    height: 50px;
+}

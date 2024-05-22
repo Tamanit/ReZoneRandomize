@@ -1,8 +1,7 @@
 server {
     listen 80;
-#     index index.html;
-#     server_name localhost;
-#     root /app/client/public;
+     server_name $domain www.$domain;
+     root /app/client/public;
 
 	location ~ /\.env {
         deny all;

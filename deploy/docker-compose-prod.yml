@@ -1,0 +1,24 @@
+version: "3.7"
+
+networks:
+  postgres-db:
+    external: true
+
+services:
+  node:
+    image: tamanit/time_cafe_manager_node:latest
+    deploy:
+      restart_policy:
+        condition: any
+      mode: replicated
+      replicas: 1
+
+  api:
+    image: tamanit/time_cafe_manager_api:latest
+    deploy:
+      restart_policy:
+        condition: any
+      mode: replicated
+      replicas: 1
+    networks:
+      - postgres-db

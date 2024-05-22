@@ -1,0 +1,24 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 3fr;
+    grid-column-gap: 10px;
+    align-items: center;
+    margin: 0 20px;
+    border: 2px #1E0E40 solid;
+    border-radius: 36px;
+    padding: 10px 20px;
+    height: 68px;
+}
+
+.buttonBlock {
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+}
+
+.textBlock {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: center;
+}
