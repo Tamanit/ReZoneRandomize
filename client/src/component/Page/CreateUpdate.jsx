@@ -47,7 +47,7 @@ const CreateUpdate = () => {
     let [playerCounts, setPlayerCounts] = useState([]);
 
     useEffect( () => {
-        useEffectAsync()
+        EffectAsync()
         if (params.id != null) {
             setRequestFromDetail(params.id)
         }
@@ -58,7 +58,7 @@ const CreateUpdate = () => {
         setRequest(await getDetail(id))
     }
 
-    let useEffectAsync = async () => {
+    let EffectAsync = async () => {
         setDiff(await getDifficulty());
         setAgeRestrictions(await getAgeRestrictions());
         setPlayerCounts(await getPlayerCount());

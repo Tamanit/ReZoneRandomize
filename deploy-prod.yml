@@ -11,13 +11,11 @@ jobs:
         working-directory: .
         run: |
           cp ./.env ./app/.env
-          docker build -f ./docker/client/Dockerfile -t tamanit/time_cafe_manager_node:latest .
-          docker push tamanit/time_cafe_manager_node
           
-          docker build -f ./docker/api/Dockerfile -t tamanit/time_cafe_manager_api:latest .
+          docker build -f ./docker/api/prod.Dockerfile -t tamanit/time_cafe_manager_api:latest .
           docker push tamanit/time_cafe_manager_api
           
-          docker build -f ./docker/nginx/Dockerfile -t tamanit/time_cafe_manager_nginx:latest .
+          docker build -f ./docker/nginx/prod.Dockerfile -t tamanit/time_cafe_manager_nginx:latest .
           docker push tamanit/time_cafe_manager_api
 
       - name: Update services

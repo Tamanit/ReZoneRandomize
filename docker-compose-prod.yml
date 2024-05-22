@@ -1,42 +1,65 @@
-version: "3.7"
-
-networks:
-  postgres-db:
-    external: true
-  server:
-    driver: bridge
-  client:
-    driver: bridge
-
 services:
-  node:
-    image: tamanit/time_cafe_manager_node:latest
+  nginx:
+    container_name: ${APP_NAME}-nginx
+    build:
+      context: .
+      dockerfile: docker/nginx/prod.Dockerfile
     deploy:
       restart_policy:
         condition: any
       mode: replicated
       replicas: 1
+      labels:
+        - anti_cafe_manager.enable=true
+        - anti_cafe_manager.docker.network=anti_cafe_manager
+        - anti_cafe_manager.http.routers.anti_cafe_manager.entrypoints=websecure
+        - anti_cafe_manager.http.services.anti_cafe_manager.loadbalancer.server.port=${NGINX_PORT}
+        - anti_cafe_manager.http.routers.anti_cafe_manager.rule=Host(`${DOMAIN}`)
+        - anti_cafe_manager.http.services.anti_cafe_manager.loadbalancer.passhostheader=true
+    environment:
+      DOMAIN: ${DOMAIN}
+      API_PORT: ${API_PORT}
     networks:
-      - client
+      - anti_cafe_manager
 
   api:
-    image: tamanit/time_cafe_manager_api:latest
+    container_name: ${APP_NAME}-api
+    build:
+      context: .
+      dockerfile: docker/api/prod.Dockerfile
     deploy:
       restart_policy:
         condition: any
       mode: replicated
       replicas: 1
+      labels:
+        - anti_cafe_manager.enable=true
+        - anti_cafe_manager.docker.network=anti_cafe_manager
+        - anti_cafe_manager.http.routers.anti_cafe_manager.entrypoints=websecure
+        - anti_cafe_manager.http.routers.anti_cafe_manager.rule=Host(`rezone-service.ru.ru`)
+        - anti_cafe_manager.http.services.anti_cafe_manager.loadbalancer.server.port=${API_PORT}
+        - anti_cafe_manager.http.services.anti_cafe_manager.loadbalancer.passhostheader=true
     networks:
-      - postgres-db
-      - server
+      - anti_cafe_manager
+      - db
 
-  nginx:
-    image: tamanit/time_cafe_manager_nginx:latest
-    deploy:
-      restart_policy:
-        condition: any
-      mode: replicated
-      replicas: 1
+  db:
+    container_name: ${APP_NAME}-db
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - '${DB_PORT}:5432'
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_DB: ${DATABASE_NAME}
     networks:
-      - client
-      - server
+      - db
+
+networks:
+  anti_cafe_manager:
+    driver: bridge
+#    external: true
+  db:
+    driver: bridge
+#    external: true

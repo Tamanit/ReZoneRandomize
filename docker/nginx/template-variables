@@ -1,3 +1,7 @@
 map $host $domain {
   default "$DOMAIN";
 }
+
+map $host $api_port {
+  default "$API_PORT";
+}
