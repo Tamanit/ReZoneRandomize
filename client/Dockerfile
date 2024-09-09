@@ -5,11 +5,11 @@ ENV NODE_ENV production
 WORKDIR /app
 
 # Cache and Install dependencies
-COPY ../../client/package.json .
+COPY package.json .
 RUN npm i
 
 # Copy app files
-COPY ../../client .
+COPY . .
 
 # Build the app
 RUN npm run build
@@ -22,7 +22,7 @@ ENV NODE_ENV production
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # Add your nginx.conf
-COPY ../../client/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port
 EXPOSE 80
