@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    left: 0;
+    top: 0;
+
+    padding: 0 20px;
+
+    min-height: 75px;
+    width: 100%;
+
+    align-items: center;
+
+    background-color: #1E0E40;
+    border-bottom-left-radius: 36px;
+    border-bottom-right-radius: 36px;
+
+    color: white;
+    text-align: center;
+}
+
+.headerFixed {
+    position: fixed;
+}
+
+.img {
+    height: 50px;
+}

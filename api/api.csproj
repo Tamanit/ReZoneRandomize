@@ -16,17 +16,5 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="src\Client\BoardGame\DtoFactory\" />
-      <Folder Include="src\Client\BoardGame\Dto\" />
-      <Folder Include="src\Client\User\DtoFactory\" />
-      <Folder Include="src\Client\User\Dto\" />
-      <Folder Include="src\Office\User\DtoFactory\" />
-      <Folder Include="src\Office\User\Dto\" />
-      <Folder Include="src\Shared\Abstraction\" />
-      <Folder Include="src\Shared\Entity\" />
-      <Folder Include="src\Shared\Repository\" />
-    </ItemGroup>
-
 
 </Project>

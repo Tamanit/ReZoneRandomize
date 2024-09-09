@@ -85,3 +85,18 @@ export let getDetail = async (id) => {
 export let createGame = async (request) => {
     (await axios.patch((new envParams()).DOMAIN + '/api/v1/office/boardGame/workbench', request, {headers: {'Content-Type': 'application/json'}}))
 }
+
+export let getRandomGame = async (branchName) => {
+    console.log(branchName);
+    branchName = branchName === undefined ? '' : branchName;
+    console.log(branchName);
+    const response = await axios.get(
+        new envParams().DOMAIN + '/api/v1/random/?branch=' + branchName,
+        {
+            headers: {
+                'Access-Control-Allow-Origin' : 'http://srv-captain--rezone-random/'
+            }
+        }
+        );
+    return response.data;
+}

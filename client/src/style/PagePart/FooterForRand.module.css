@@ -1,0 +1,24 @@
+footer {
+    min-height: 75px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: #1E0E40;
+    color: white;
+
+    border-top-left-radius: 36px;
+    border-top-right-radius: 36px;
+
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+}
+
+.img {
+    height: 50px;
+}

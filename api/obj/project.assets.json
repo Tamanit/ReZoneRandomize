@@ -1932,19 +1932,19 @@
     ]
   },
   "packageFolders": {
-    "/root/.nuget/packages/": {}
+    "/home/tamanit/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/app/api/api.csproj",
+      "projectUniqueName": "/home/tamanit/Projects/ReZoneRandomize/api/api.csproj",
       "projectName": "api",
-      "projectPath": "/app/api/api.csproj",
-      "packagesPath": "/root/.nuget/packages/",
-      "outputPath": "/app/api/obj/",
+      "projectPath": "/home/tamanit/Projects/ReZoneRandomize/api/api.csproj",
+      "packagesPath": "/home/tamanit/.nuget/packages/",
+      "outputPath": "/home/tamanit/Projects/ReZoneRandomize/api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/root/.nuget/NuGet/NuGet.Config"
+        "/home/tamanit/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -2021,7 +2021,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
